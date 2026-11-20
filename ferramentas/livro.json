@@ -1,0 +1,426 @@
+{
+ "titulo": "RAG from First Principles",
+ "subtitulo": "Retrieval-Augmented Generation do zero",
+ "autor": "Jia Huang",
+ "repo": "estudos-rag-from-first-principles",
+ "linguagem": "python",
+ "paginas": 492,
+ "preparacao": "import sys\nsys.path.insert(0, \"../comum\")  # ia.py (modelos via OpenRouter) e corpus.py (base de conhecimento de exemplo)\nfrom ia import *\nfrom corpus import DOCS\nimport re, json, math, random\nimport numpy as np\nprint(\"Pronto. Modelo padrão:\", MODELO, \"| documentos na base:\", len(DOCS))",
+ "capitulos": {
+  "1": {
+   "titulo": "Importação de dados (Data Import)",
+   "pag": 28,
+   "secoes": [
+    [
+     2,
+     "Does the parsing process depend on file type?",
+     29
+    ],
+    [
+     2,
+     "Reading simple text with a DataLoader",
+     30
+    ],
+    [
+     2,
+     "Parsing specific elements with the JSON loader",
+     42
+    ],
+    [
+     2,
+     "Reading text from images",
+     46
+    ],
+    [
+     2,
+     "Importing table data in CSV format",
+     53
+    ],
+    [
+     2,
+     "Crawling and parsing web documents",
+     57
+    ],
+    [
+     2,
+     "Understanding the cultural and story background of Black Myth: Wukong",
+     62
+    ],
+    [
+     2,
+     "Markdown file titles and structure",
+     63
+    ],
+    [
+     2,
+     "Text formats, layout recognition, and table parsing in PDF files",
+     66
+    ],
+    [
+     2,
+     "Summary",
+     92
+    ]
+   ]
+  },
+  "2": {
+   "titulo": "Divisão em pedaços (Text Chunking)",
+   "pag": 94,
+   "secoes": [
+    [
+     2,
+     "Why chunking is very important",
+     95
+    ],
+    [
+     2,
+     "Context window limits the maximum chunk length",
+     96
+    ],
+    [
+     2,
+     "Different chunking strategies",
+     101
+    ],
+    [
+     2,
+     "Using the unstructured tool for document structure-based chunking",
+     110
+    ],
+    [
+     2,
+     "Using LlamaIndex SemanticSplitterNodeParser for semantic chunking",
+     112
+    ],
+    [
+     2,
+     "Advanced indexing techniques related to chunking",
+     113
+    ],
+    [
+     2,
+     "Workflow of HyDE technology",
+     119
+    ],
+    [
+     2,
+     "Summary",
+     122
+    ]
+   ]
+  },
+  "3": {
+   "titulo": "Embeddings (Information Embedding)",
+   "pag": 124,
+   "secoes": [
+    [
+     2,
+     "Embedding is the encoding of external information",
+     124
+    ],
+    [
+     2,
+     "Measuring similarity between vectors",
+     128
+    ],
+    [
+     2,
+     "From early word embedding models to large model embeddings",
+     129
+    ],
+    [
+     2,
+     "Modern embedding models: OpenAI, jina, cohere, voyage",
+     139
+    ],
+    [
+     2,
+     "Sparse embedding, dense embedding, and BM25",
+     149
+    ],
+    [
+     2,
+     "Multimodal embedding model visualized_BGE",
+     155
+    ],
+    [
+     2,
+     "Using embedding models with frameworks like LangChain and LlamaIndex",
+     156
+    ],
+    [
+     2,
+     "Fine-tuning embedding models",
+     160
+    ],
+    [
+     2,
+     "Summary",
+     166
+    ]
+   ]
+  },
+  "4": {
+   "titulo": "Armazenamento vetorial (Vector Storage)",
+   "pag": 168,
+   "secoes": [
+    [
+     2,
+     "How are vectors stored",
+     170
+    ],
+    [
+     2,
+     "Components of a vector database",
+     176
+    ],
+    [
+     2,
+     "Indexing in vector databases",
+     179
+    ],
+    [
+     2,
+     "Vector retrieval (similarity measurement)",
+     185
+    ],
+    [
+     2,
+     "Mainstream vector databases",
+     187
+    ],
+    [
+     2,
+     "Selection and evaluation of vector databases",
+     190
+    ],
+    [
+     2,
+     "Index and search settings in vector databases",
+     194
+    ],
+    [
+     2,
+     "Choosing the appropriate index type",
+     200
+    ],
+    [
+     2,
+     "Selecting the appropriate metric",
+     210
+    ],
+    [
+     2,
+     "Search and query: Two retrieval methods",
+     219
+    ],
+    [
+     2,
+     "Using Milvus for hybrid search",
+     220
+    ],
+    [
+     2,
+     "Vector databases and multimodal retrieval",
+     230
+    ],
+    [
+     2,
+     "Using ResNet-34 to extract image features and perform retrieval",
+     240
+    ],
+    [
+     2,
+     "Data maintenance and vector storage CRUD operations in RAG systems",
+     244
+    ],
+    [
+     2,
+     "Summary",
+     249
+    ]
+   ]
+  },
+  "5": {
+   "titulo": "Pré-recuperação (Pre-Retrieval Processing)",
+   "pag": 250,
+   "secoes": [
+    [
+     2,
+     "Why pre-retrieval processing matters",
+     250
+    ],
+    [
+     2,
+     "Techniques included in pre-retrieval processing",
+     251
+    ],
+    [
+     2,
+     "Query construction: Asking questions in natural language",
+     252
+    ],
+    [
+     2,
+     "Text-to-SQL: Transforming natural language into SQL",
+     253
+    ],
+    [
+     2,
+     "Text-to-cypher: From natural language to graph database queries",
+     270
+    ],
+    [
+     2,
+     "Self-query retriever automatically generating metadata filter conditions from queries",
+     276
+    ],
+    [
+     2,
+     "Query translation: Better explaining user questions",
+     284
+    ],
+    [
+     2,
+     "Query routing finding the right data source",
+     300
+    ]
+   ]
+  },
+  "6": {
+   "titulo": "Otimização de índices (Index Optimization)",
+   "pag": 308,
+   "secoes": [
+    [
+     2,
+     "From small to large node-sentence sliding window and parent-child text chunks",
+     309
+    ],
+    [
+     2,
+     "From summary to detail: building summary-to-detail indexes with IndexNode and RecursiveRetriever",
+     318
+    ],
+    [
+     2,
+     "Hierarchical merging HierarchicalNodeParser and RAPTOR",
+     323
+    ],
+    [
+     2,
+     "Forward/backward linking connecting related nodes by forward/backward extension",
+     331
+    ],
+    [
+     2,
+     "Hybrid retrieval improving retrieval accuracy and expanding coverage",
+     336
+    ],
+    [
+     2,
+     "Summary",
+     346
+    ]
+   ]
+  },
+  "7": {
+   "titulo": "Pós-recuperação (Retrieval Post-Processing)",
+   "pag": 348,
+   "secoes": [
+    [
+     2,
+     "Common retrieval post-processing techniques",
+     350
+    ],
+    [
+     2,
+     "Difference between LangChain and LlamaIndex recency weighting",
+     374
+    ],
+    [
+     2,
+     "Compression",
+     375
+    ],
+    [
+     2,
+     "Remembering long context through prompt caching",
+     384
+    ],
+    [
+     2,
+     "Correction",
+     385
+    ],
+    [
+     2,
+     "Summary",
+     396
+    ]
+   ]
+  },
+  "8": {
+   "titulo": "Geração da resposta (Response Generation)",
+   "pag": 400,
+   "secoes": [
+    [
+     2,
+     "Improving LLM output quality by refining prompts",
+     401
+    ],
+    [
+     2,
+     "Summary",
+     425
+    ]
+   ]
+  },
+  "9": {
+   "titulo": "Avaliação do sistema (System Evaluation)",
+   "pag": 426,
+   "secoes": [
+    [
+     2,
+     "Evaluation system for RAG systems",
+     428
+    ],
+    [
+     2,
+     "Evaluation frameworks for RAG systems",
+     446
+    ],
+    [
+     2,
+     "Summary",
+     458
+    ]
+   ]
+  },
+  "10": {
+   "titulo": "Paradigmas complexos de RAG (Complex RAG Paradigms)",
+   "pag": 460,
+   "secoes": [
+    [
+     2,
+     "An overview of complex RAG paradigms",
+     461
+    ],
+    [
+     2,
+     "Agentic RAG or agent-driven RAG systems",
+     465
+    ],
+    [
+     2,
+     "Multimodal RAG",
+     466
+    ],
+    [
+     2,
+     "Summary",
+     467
+    ]
+   ]
+  }
+ }
+}
