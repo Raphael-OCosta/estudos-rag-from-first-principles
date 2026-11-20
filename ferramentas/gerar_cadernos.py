@@ -49,11 +49,11 @@ for chave, info in LIVRO["capitulos"].items():
 
     pratica = [md(cab + "**Como usar:**\n"
                   "1. Rode a célula **Preparação** (`Shift+Enter`).\n"
-                  "2. Leia cada seção no livro. Nas seções com **🧪 Exercício**, escreva o código na célula vazia.\n"
-                  "3. Nas outras, use a célula **📝 Anotações** para resumir com suas palavras (dois cliques para editar).\n\n"
+                  "2. Leia cada seção no livro. Nas seções com **Exercício**, escreva o código na célula vazia.\n"
+                  "3. Nas outras, use a célula **Anotações** para resumir com suas palavras (dois cliques para editar).\n\n"
                   f"**Travou?** O gabarito está em `../resolvidos/{nome}`. Tente antes de olhar."),
                md("## Preparação"), code(LIVRO["preparacao"])]
-    gabarito = [md(cab + "📗 **Gabarito** dos exercícios do caderno de prática. Tente sozinho antes de olhar."),
+    gabarito = [md(cab + "**Gabarito** dos exercícios do caderno de prática. Tente sozinho antes de olhar."),
                 md("## Preparação"), code(LIVRO["preparacao"])]
 
     for nivel, sec, pag in info["secoes"]:
@@ -61,23 +61,23 @@ for chave, info in LIVRO["capitulos"].items():
         pratica.append(md(cabecalho))
         exs = [(i, e) for i, e in ex_cap if sec.startswith(e[1])]
         if sec.lower().startswith("resumo"):
-            pratica.append(md("📝 **Os 3 pontos mais importantes do capítulo, com suas palavras:**\n\n1. \n2. \n3. "))
+            pratica.append(md("**Os 3 pontos mais importantes do capítulo, com suas palavras:**\n\n1. \n2. \n3. "))
             continue
         if not exs and sec.lower().startswith(("exercícios", "exercicios", "excercícios", "exercises")):
-            pratica += [md("✍️ **Exercícios do livro:** resolva aqui (crie mais células com `Esc` + `B`)."), code()]
+            pratica += [md("**Exercícios do livro:** resolva aqui (crie mais células com `Esc` + `B`)."), code()]
             continue
         if not exs:
-            pratica.append(md("📝 **Anotações:** _(dois cliques para escrever)_"))
+            pratica.append(md("**Anotações:** _(dois cliques para escrever)_"))
             continue
         gabarito.append(md(cabecalho))
         for i, (_, _, nome_ex, enunciado, solucao) in exs:
             usados.add(i)
-            pratica += [md(f"#### 🧪 Exercício: {nome_ex}\n\n{enunciado}"), code()]
-            gabarito += [md(f"#### 🧪 Exercício: {nome_ex}\n\n{enunciado}"), code(solucao)]
+            pratica += [md(f"#### Exercício: {nome_ex}\n\n{enunciado}"), code()]
+            gabarito += [md(f"#### Exercício: {nome_ex}\n\n{enunciado}"), code(solucao)]
 
     if not info["secoes"]:
-        pratica.append(md("📝 **Anotações do capítulo:** _(dois cliques para escrever)_"))
-    pratica.append(md("## 📝 Minhas anotações do capítulo\n\n- Aprendi:\n- Dúvidas:\n"))
+        pratica.append(md("**Anotações do capítulo:** _(dois cliques para escrever)_"))
+    pratica.append(md("## Minhas anotações do capítulo\n\n- Aprendi:\n- Dúvidas:\n"))
 
     for pasta, cells, proteger in (("praticar", pratica, True), ("resolvidos", gabarito, False)):
         destino = RAIZ / pasta / nome

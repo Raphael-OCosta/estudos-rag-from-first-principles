@@ -32,7 +32,7 @@ for k, c in L["capitulos"].items():
     n = int(k)
     qtd = sum(1 for e in EXERCICIOS if e[0] == n)
     linhas.append(f"<tr><td>{n}</td><td>{E(c['titulo'])}</td><td>{c['pag']}</td>"
-                  f"<td><code>cap{n:02d}_{slug(c['titulo'])}</code></td><td>{qtd or '📝'}</td></tr>")
+                  f"<td><code>cap{n:02d}_{slug(c['titulo'])}</code></td><td>{qtd or 'leitura'}</td></tr>")
 total = len(EXERCICIOS)
 paginas = L.get("paginas") or max(c["pag"] for c in L["capitulos"].values())
 
@@ -73,9 +73,9 @@ corpo = f"""
   <h2>1. O método: ler e praticar</h2>
   <p>Ler sem praticar dá a sensação de que você entendeu. Praticar sem ler vira copiar e colar. Os dois juntos fixam o conteúdo:</p>
   <div class="passo"><div class="n">1</div><div><b>Leia</b> uma seção no PDF (o caderno diz a página).</div></div>
-  <div class="passo"><div class="n">2</div><div><b>Escreva</b> a solução do 🧪 exercício na célula vazia do caderno de <code>praticar/</code>. Errar faz parte.</div></div>
+  <div class="passo"><div class="n">2</div><div><b>Escreva</b> a solução do exercício na célula vazia do caderno de <code>praticar/</code>. Errar faz parte.</div></div>
   <div class="passo"><div class="n">3</div><div><b>Confira</b> com o gabarito em <code>resolvidos/</code> só depois de tentar.</div></div>
-  <div class="passo"><div class="n">4</div><div><b>Resuma</b> nas células 📝 com as suas palavras. Se não conseguir explicar, releia.</div></div>
+  <div class="passo"><div class="n">4</div><div><b>Resuma</b> nas células com as suas palavras. Se não conseguir explicar, releia.</div></div>
   <div class="passo"><div class="n">5</div><div><b>Salve no GitHub</b> (commit + push): seu progresso fica registrado e público.</div></div>
   <h3>O que tem na pasta</h3>
   <table><tr><th>Pasta/arquivo</th><th>Para que serve</th></tr>
@@ -89,10 +89,10 @@ corpo = f"""
 
 <section class="pg">
   <h2>2. Primeira vez (uma vez só)</h2>
-  <div class="passo"><div class="n">1</div><div>Abra o VS Code pelo atalho <b>Projetos e Estudos</b> da Área de Trabalho. A pasta deste livro aparece na barra da esquerda.<div class="ok">✔ Você deve ver as pastas praticar/ e resolvidos/.</div></div></div>
+  <div class="passo"><div class="n">1</div><div>Abra o VS Code pelo atalho <b>Projetos e Estudos</b> da Área de Trabalho. A pasta deste livro aparece na barra da esquerda.<div class="ok">Você deve ver as pastas praticar/ e resolvidos/.</div></div></div>
   <div class="passo"><div class="n">2</div><div>Se aparecer “Do you trust the authors…”, clique em <b>Yes, I trust the authors</b>.</div></div>
   <div class="passo"><div class="n">3</div><div>Abra <code>praticar/cap01_…ipynb</code>. No canto superior direito, clique em <b>Select Kernel</b> → <b>Python Environments</b> → <b>{E(KERNEL)}</b> desta pasta.</div></div>
-  <div class="passo"><div class="n">4</div><div>Clique na célula <b>Preparação</b> e aperte <kbd>Shift</kbd>+<kbd>Enter</kbd>.<div class="ok">✔ Aparece “Pronto.” com a versão da biblioteca.</div></div></div>
+  <div class="passo"><div class="n">4</div><div>Clique na célula <b>Preparação</b> e aperte <kbd>Shift</kbd>+<kbd>Enter</kbd>.<div class="ok">Aparece “Pronto.” com a versão da biblioteca.</div></div></div>
   <div class="passo"><div class="n">5</div><div>Abra o PDF do livro ao lado (ou em outra tela) na página indicada no topo do caderno.</div></div>
   <h3>Problemas comuns</h3>
   <table><tr><th>O que aparece</th><th>O que fazer</th></tr>
@@ -106,20 +106,20 @@ corpo = f"""
   <h2>3. A rotina de 60 minutos</h2>
   <div class="linha"><div class="min">0–5 min</div><div>Abra o caderno do capítulo e rode a Preparação. Releia suas anotações da última vez.</div></div>
   <div class="linha"><div class="min">5–30 min</div><div>Leia a próxima seção no PDF. Teste os exemplos do livro numa célula nova (<kbd>B</kbd> cria uma célula abaixo).</div></div>
-  <div class="linha"><div class="min">30–50 min</div><div>Resolva o 🧪 exercício sem olhar o gabarito. Travou por 10 minutos? Olhe, entenda e reescreva sem copiar.</div></div>
-  <div class="linha"><div class="min">50–55 min</div><div>Escreva o 📝 resumo da seção.</div></div>
+  <div class="linha"><div class="min">30–50 min</div><div>Resolva o exercício sem olhar o gabarito. Travou por 10 minutos? Olhe, entenda e reescreva sem copiar.</div></div>
+  <div class="linha"><div class="min">50–55 min</div><div>Escreva o resumo da seção.</div></div>
   <div class="linha"><div class="min">55–60 min</div><div>Salve e envie para o GitHub (abaixo).</div></div>
   <h3>Salvar o progresso no GitHub</h3>
   <div class="passo"><div class="n">1</div><div>No VS Code, clique no ícone <b>Source Control</b> (3º da barra esquerda) e escolha o repositório <b>{E(PASTA)}</b>.</div></div>
   <div class="passo"><div class="n">2</div><div>Escreva uma mensagem curta, por ex.: <code>cap03: produto escalar e inversa</code>.</div></div>
-  <div class="passo"><div class="n">3</div><div>Clique em <b>Commit</b> (se perguntar sobre “stage”, responda <b>Yes</b>) e depois em <b>Sync Changes</b>.<div class="ok">✔ No site do GitHub, o repositório mostra o seu commit.</div></div></div>
+  <div class="passo"><div class="n">3</div><div>Clique em <b>Commit</b> (se perguntar sobre “stage”, responda <b>Yes</b>) e depois em <b>Sync Changes</b>.<div class="ok">No site do GitHub, o repositório mostra o seu commit.</div></div></div>
   <div class="box dica">Ritmo sugerido: cerca de {max(5, round(paginas / 30))} sessões por semana até terminar as {paginas} páginas. Constância vale mais que velocidade.</div>
 </section>
 
 <section class="pg">
   <h2>4. Mapa dos capítulos</h2>
   <table><tr><th>Cap.</th><th>Título</th><th>PDF p.</th><th>Caderno</th><th>Exercícios</th></tr>{''.join(linhas)}</table>
-  <p>📝 = capítulo de leitura: use as células de anotações. Total: <b>{total} exercícios</b>.</p>
+  <p>"leitura" = capítulo só de leitura: use as células de anotações. Total: <b>{total} exercícios</b>.</p>
   <h3>Atalhos que você vai usar</h3>
   <table><tr><th>Atalho</th><th>O que faz</th></tr>
   <tr><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td><td>Roda a célula e vai para a próxima</td></tr>

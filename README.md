@@ -1,4 +1,4 @@
-# 🔎 Estudos — *RAG from First Principles* (Jia Huang)
+# Estudos — *RAG from First Principles* (Jia Huang)
 
 > **A melhor forma de estudar um livro técnico é ler e praticar ao mesmo tempo.**
 > Leia uma seção, feche o livro e escreva o código com as próprias mãos. Só depois confira o gabarito.
@@ -6,17 +6,17 @@
 Este repositório registra meu estudo de *RAG from First Principles* (Packt, em inglês). O livro percorre o *pipeline* de *Retrieval-Augmented Generation*: importar dados, dividir em pedaços, gerar embeddings, armazenar vetores, tratar a consulta antes e o resultado depois da busca, gerar a resposta e avaliar o sistema.
 Os cadernos estão em português e mantêm os termos técnicos no original. Cada seção aponta para a página do PDF e, quando cabe, traz um exercício que monta **uma peça do RAG do zero**.
 
-## 🔁 O método
+## O método
 
 | Passo | O que fazer | Onde |
 |---|---|---|
 | 1. Ler | Ler a seção indicada | PDF do livro (página no caderno) |
-| 2. Praticar | Escrever a solução do 🧪 exercício **sem olhar a resposta** | `praticar/capXX_*.ipynb` |
+| 2. Praticar | Escrever a solução do exercício **sem olhar a resposta** | `praticar/capXX_*.ipynb` |
 | 3. Conferir | Comparar com o gabarito | `resolvidos/capXX_*.ipynb` |
-| 4. Resumir | Explicar com as próprias palavras nas células 📝 | `praticar/` |
+| 4. Resumir | Explicar com as próprias palavras nas células | `praticar/` |
 | 5. Registrar | Commit + push | GitHub |
 
-## 📚 Conteúdo (30 exercícios)
+## Conteúdo (30 exercícios)
 
 | Cap. | Peça do RAG | O que se constrói |
 |---|---|---|
@@ -33,14 +33,14 @@ Os cadernos estão em português e mantêm os termos técnicos no original. Cada
 
 A base de conhecimento (`comum/corpus.py`) é **inventada**: regras de uma biblioteca fictícia. Por isso pode ser enviada ao modelo sem risco.
 
-## 🛠️ Melhorias e escolhas
+## Melhorias e escolhas
 
 - O livro usa LangChain, LlamaIndex e Milvus. Aqui cada técnica é **implementada à mão** (NumPy, `rank_bm25`, scikit-learn, `sqlite3`) para entender o mecanismo; depois fica fácil reconhecer o mesmo conceito nos *frameworks*.
 - Os modelos são acessados pelo **OpenRouter** com o SDK da OpenAI (`comum/ia.py`), com controle de custo (`gasto()`).
 - A chave fica **cifrada pelo Windows (DPAPI)** em `%USERPROFILE%\.secrets\openrouter.dpapi`, ou na variável `OPENROUTER_API_KEY`. Ela nunca vai para o código.
 - 17 dos 30 exercícios rodam **sem internet**. O teste automático (`ferramentas/testar_cadernos.py`) executa o gabarito offline e separa erros de código (0) de células que dependem do modelo.
 
-## ▶️ Como usar
+## Como usar
 
 ```powershell
 python -m venv .venv
@@ -52,7 +52,7 @@ $env:OPENROUTER_API_KEY="teste"; $env:IA_BASE_URL="http://127.0.0.1:9/v1"
 
 Abra `praticar/cap01_*.ipynb` no VS Code e escolha o kernel `.venv`. O [Guia de Estudos (PDF)](Guia_de_Estudos.pdf) explica o passo a passo.
 
-## ⚖️ Direitos autorais
+## Direitos autorais
 
 O livro **não** está neste repositório. Para estudar, use a sua própria cópia. O código oficial (licença MIT) está em [PacktPublishing/RAG-from-First-Principles](https://github.com/PacktPublishing/RAG-from-First-Principles).
 Os exercícios, os cadernos, os scripts e o guia são autorais e estão sob licença [MIT](LICENSE).
